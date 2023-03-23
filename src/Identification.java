@@ -9,4 +9,8 @@ public class Identification {
         this.name = name;
         UUID = UUID.randomUUID();
     }
+
+    public String getName() {
+        return name;
+    }
 }
