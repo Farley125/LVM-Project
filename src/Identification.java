@@ -13,4 +13,8 @@ public class Identification {
     public String getName() {
         return name;
     }
+
+    public java.util.UUID getUUID() {
+        return UUID;
+    }
 }
