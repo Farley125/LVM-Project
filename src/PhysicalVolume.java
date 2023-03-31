@@ -15,7 +15,7 @@ public class PhysicalVolume extends Identification {
 
     public static void printList(ArrayList<PhysicalVolume> list) {
         for (PhysicalVolume i : list) {
-            System.out.println(i.getName() + ": " + i.getSD().getSize() + "G " + i.getUUID());
+            System.out.println(i.getName() + ": [" + i.getSD().getSize() + "G] [" + i.getUUID() + "]");
         }
     }
 }

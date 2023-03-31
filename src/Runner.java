@@ -13,7 +13,20 @@ public class Runner {
             } else if (input.substring(0, 6).equals("lvlist")) {
 
             } else if (input.substring(0, 8).equals("lvcreate")) {
-
+                String name = input.substring(9, 9 + input.substring(input.indexOf(" ") + 1).indexOf(" "));
+                int size = Integer.parseInt(input.substring(10 + name.length(), input.substring(11 + name.length()).indexOf(" ") + 10 + name.length()));
+                String vg = input.substring(14 + name.length() + Integer.toString(size).length());
+                System.out.println(name + "r");
+                System.out.println(size + "r");
+                System.out.println(vg + "r");
+                for (int i = 0; i < LVMStore.getVolumeGroupList().size(); i++) {
+                    VolumeGroup check = LVMStore.getVolumeGroupList().get(i);
+                    if (check.getName().equals(vg)) {
+                        LogicalVolume LV = new LogicalVolume(name, size, check);
+                        LVMStore.addLogicalVolume(LV);
+                        System.out.println("LogicalVolume " + LV.getName() + " created");
+                    }
+                }
             } else if (input.substring(0, 8).equals("pvcreate")) {
                 String name = input.substring(9, 9 + input.substring(input.indexOf(" ") + 1).indexOf(" "));
                 String drive = input.substring(10 + name.length());
@@ -39,8 +52,8 @@ public class Runner {
             } else if (input.substring(0, 8).equals("vgextend")) {
                 String name = input.substring(9, 9 + input.substring(input.indexOf(" ") + 1).indexOf(" "));
                 String pv = input.substring(10 + name.length());
-                VolumeGroup vgActual;
-                PhysicalVolume pvActual;
+                VolumeGroup vgActual = null;
+                PhysicalVolume pvActual = null;
                 for (int i = 0; i < LVMStore.getVolumeGroupList().size(); i++) {
                     VolumeGroup check = LVMStore.getVolumeGroupList().get(i);
                     if (check.getName().equals(name)) {
@@ -58,11 +71,12 @@ public class Runner {
                 PhysicalHardDrive.printList(LVMStore.getHardDriveList());
             } else if (input.substring(0, 13).equals("install-drive")) {
                 String name = input.substring(14, 14 + input.substring(input.indexOf(" ") + 1).indexOf(" "));
-                int size = Integer.parseInt(input.substring(15 + name.length()));
+                int size = Integer.parseInt(input.substring(15 + name.length(), input.length()-1));
                 PhysicalHardDrive drive = new PhysicalHardDrive(name, size);
                 LVMStore.addHardDrive(drive);
                 System.out.println("Drive " + drive.getName() + " installed");
             }
+            else System.out.println("Error.");
         }
     }
 }

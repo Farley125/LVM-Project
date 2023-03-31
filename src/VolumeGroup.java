@@ -12,5 +12,13 @@ public class VolumeGroup extends Identification {
         listOfPVolumes.add(pVolume);
     }
 
-
+    public static void printList(ArrayList<VolumeGroup> list) {
+        for (VolumeGroup i : list) {
+            int size = 0;
+            for (PhysicalVolume pv : i.listOfPVolumes) {
+                size += pv.getSD().getSize();
+            }
+            System.out.println(i.getName() + ": " + size + "G " + i.getUUID());
+        }
+    }
 }
